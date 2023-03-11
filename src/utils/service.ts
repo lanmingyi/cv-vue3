@@ -10,13 +10,13 @@ function createService() {
   const service = axios.create()
   // 请求拦截
   service.interceptors.request.use(
-    (config:any) => config,
+    (config) => config,
     // 发送失败
-    (error:any) => Promise.reject(error)
+    (error) => Promise.reject(error)
   )
   // 响应拦截（可根据具体业务作出相应的调整）
   service.interceptors.response.use(
-    (response:any) => {
+    (response) => {
       // apiData 是 API 返回的数据
       const apiData = response.data as any
       // 这个 Code 是和后端约定的业务 Code
@@ -37,7 +37,7 @@ function createService() {
         }
       }
     },
-    (error:any) => {
+    (error) => {
       // Status 是 HTTP 状态码
       const status = get(error, "response.status")
       switch (status) {

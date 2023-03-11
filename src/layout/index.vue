@@ -1,17 +1,17 @@
 <template>
   <div :class="classObj" class="app-wrapper">
     <div v-if="classObj.mobile && classObj.openSidebar" class="drawer-bg" @click="handleClickOutside" />
-    <Sidebar class="sidebar-container"></Sidebar>
-<!--    <div :class="{ hasTagsView: showTagsView }" class="main-container">-->
-<!--      <div :class="{ 'fixed-header': fixedHeader }">-->
-<!--        <NavigationBar />-->
-<!--        <TagsView v-if="showTagsView" />-->
-<!--      </div>-->
-<!--      <AppMain />-->
-<!--      <RightPanel v-if="showSettings">-->
-<!--        <Settings />-->
-<!--      </RightPanel>-->
-<!--    </div>-->
+    <Sidebar class="sidebar-container" />
+    <div :class="{ hasTagsView: showTagsView }" class="main-container">
+      <div :class="{ 'fixed-header': fixedHeader }">
+        <NavigationBar />
+        <TagsView v-if="showTagsView" />
+      </div>
+      <AppMain />
+      <RightPanel v-if="showSettings">
+        <Settings />
+      </RightPanel>
+    </div>
   </div>
 </template>
 
@@ -19,8 +19,7 @@
 import {computed} from "vue";
 import { useAppStore, DeviceType } from "@/store/modules/app"
 import { useSettingsStore } from "@/store/modules/settings"
-import {Sidebar} from "./components";
-// import {Sidebar, AppMain, NavigationBar, Settings, TagsView, RightPanel} from "./components";
+import {AppMain, NavigationBar, Settings, Sidebar, TagsView, RightPanel} from "./components";
 import useResize from "./hooks/useResize"
 
 

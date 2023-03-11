@@ -15,8 +15,11 @@
     "js-cookie": "^3.0.1",
     "nprogress": "^0.2.0",
     "path-browserify": "^1.0.1",
+    "path-to-regexp": "^6.2.1",
     "pinia": "^2.0.33",
     "sass": "^1.58.3",
+    "screenfull": "^6.0.2",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },

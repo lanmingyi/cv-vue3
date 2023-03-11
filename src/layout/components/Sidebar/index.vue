@@ -22,7 +22,6 @@
       </el-menu>
     </el-scrollbar>
   </div>
-
 </template>
 
 <script setup lang="ts">

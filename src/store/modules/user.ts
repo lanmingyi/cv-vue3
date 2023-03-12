@@ -28,11 +28,12 @@ export const useUserStore = defineStore("user", () => {
       loginApi({
         username: loginData.username,
         password: loginData.password,
-        code: loginData.code
+        captcha: loginData.captcha,
+        checkKey: loginData.checkKey,
       })
         .then((res) => {
-          setToken(res.data.token)
-          token.value = res.data.token
+          setToken(res.result.token)
+          token.value = res.result.token
           resolve(true)
         })
         .catch((error) => {
@@ -45,11 +46,14 @@ export const useUserStore = defineStore("user", () => {
     return new Promise((resolve, reject) => {
       getUserInfoApi()
         .then((res) => {
-          const data = res.data
-          username.value = data.username
+          const data = res.result
+          // username.value = data.username
           // 验证返回的 roles 是否是一个非空数组
-          if (data.roles && data.roles.length > 0) {
-            roles.value = data.roles
+          // if (data.roles && data.roles.length > 0) {
+          //   roles.value = data.roles
+          // }
+          if (data.menu && data.menu.length > 0) {
+            roles.value = data.menu
           } else {
             // 塞入一个没有任何作用的默认角色，不然路由守卫逻辑会无限循环
             roles.value = asyncRouteSettings.defaultRoles

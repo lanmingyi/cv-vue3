@@ -10,7 +10,13 @@ function createService() {
   const service = axios.create()
   // 请求拦截
   service.interceptors.request.use(
-    (config) => config,
+    (config) => {
+      const token = getToken()
+      if(token){
+        config.headers['X-Access-Token'] = token  // 让每个请求携带自定义token，请根据实际情况自行修改
+      }
+      return config
+    },
     // 发送失败
     (error) => Promise.reject(error)
   )
@@ -25,16 +31,21 @@ function createService() {
       if (code === undefined) {
         ElMessage.error("非本系统的接口")
         return Promise.reject(new Error("非本系统的接口"))
-      } else {
-        switch (code) {
-          case 0:
-            // code === 0 代表没有错误
-            return apiData
-          default:
+      }
+      else if(code ===0 || code === 200){
+        ElMessage.success(apiData.message)
+        return apiData
+      }
+      else {
+        // switch (code) {
+        //   case 200:
+        //     // code === 200 代表没有错误
+        //     return apiData
+        //   default:
             // 不是正确的 Code
             ElMessage.error(apiData.message || "Error")
             return Promise.reject(new Error("Error"))
-        }
+        // }
       }
     },
     (error) => {

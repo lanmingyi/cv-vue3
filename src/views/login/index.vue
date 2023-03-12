@@ -30,7 +30,7 @@
           </el-form-item>
           <el-form-item prop="code">
             <el-input
-                v-model.trim="loginForm.code"
+                v-model.trim="loginForm.captcha"
                 placeholder="验证码"
                 type="text"
                 tabindex="3"
@@ -74,20 +74,22 @@ const loginFormRef = ref<FormInstance | null>(null)
 const loading = ref(false)
 /** 验证码图片 URL */
 const codeUrl = ref("")
+const currdatetime = ref()
 /** 登录表单数据 */
 const loginForm: ILoginRequestData = reactive({
   username: "admin",
-  password: "12345678",
-  code: ""
+  password: "123456",
+  captcha: "",
+  checkKey: 0
 })
 /** 登录表单校验规则 */
 const loginFormRules: FormRules = {
   username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
   password: [
     { required: true, message: "请输入密码", trigger: "blur" },
-    { min: 8, max: 16, message: "长度在 8 到 16 个字符", trigger: "blur" }
+    { min: 6, max: 16, message: "长度在 8 到 16 个字符", trigger: "blur" }
   ],
-  code: [{ required: true, message: "请输入验证码", trigger: "blur" }]
+  captcha: [{ required: true, message: "请输入验证码", trigger: "blur" }]
 }
 /** 登录逻辑 */
 const handleLogin = () => {
@@ -98,7 +100,8 @@ const handleLogin = () => {
           .login({
             username: loginForm.username,
             password: loginForm.password,
-            code: loginForm.code
+            captcha: loginForm.captcha,
+            checkKey: currdatetime.value,
           })
           .then(() => {
             router.push({ path: "/" })
@@ -117,12 +120,13 @@ const handleLogin = () => {
 }
 /** 创建验证码 */
 const createCode = () => {
+  currdatetime.value = new Date().getTime()
   // 先清空验证码的输入
-  loginForm.code = ""
+  loginForm.captcha = ""
   // 获取验证码
   codeUrl.value = ""
-  getLoginCodeApi().then((res) => {
-    codeUrl.value = res.data
+  getLoginCodeApi(currdatetime.value).then((res) => {
+    codeUrl.value = res.result
   })
 }
 

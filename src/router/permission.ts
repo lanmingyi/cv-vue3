@@ -25,9 +25,11 @@ router.beforeEach(async (to, _from, next) => {
       if (userStore.roles.length === 0) {
         try {
           if (asyncRouteSettings.open) {
+            debugger
             // 注意：角色必须是一个数组！ 例如: ['admin'] 或 ['developer', 'editor']
             await userStore.getInfo()
             const roles = userStore.roles
+            console.log('roles', roles)
             // 根据角色生成可访问的 Routes（可访问路由 = 常驻路由 + 有访问权限的动态路由）
             permissionStore.setRoutes(roles)
           } else {

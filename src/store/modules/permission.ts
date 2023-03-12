@@ -21,7 +21,9 @@ const hasPermission = (roles: string[], route: RouteRecordRaw) => {
 
 const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]) => {
   const res: RouteRecordRaw[] = []
+  console.log('routes',routes)
   routes.forEach((route) => {
+    console.log('route', route)
     const r = { ...route }
     if (hasPermission(roles, r)) {
       if (r.children) {
@@ -38,6 +40,7 @@ export const usePermissionStore = defineStore("permission", () => {
   const dynamicRoutes = ref<RouteRecordRaw[]>([])
 
   const setRoutes = (roles: string[]) => {
+    debugger
     let accessedRoutes
     if (!asyncRouteSettings.open) {
       accessedRoutes = asyncRoutes

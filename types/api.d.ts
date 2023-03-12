@@ -2,5 +2,6 @@
 interface IApiResponseData<T> {
   code: number
   data: T
-  message: string
+  message: string,
+  result: T
 }

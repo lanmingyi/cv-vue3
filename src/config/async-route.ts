@@ -14,7 +14,7 @@ interface IAsyncRouteSettings {
 }
 
 const asyncRouteSettings: IAsyncRouteSettings = {
-  open: false,
+  open: true,
   defaultRoles: ["DEFAULT_ROLE"]
 }
 

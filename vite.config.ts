@@ -12,7 +12,7 @@ import * as process from "process";
 // https://vitejs.dev/config/
 export default defineConfig({
   /** 打包时根据实际情况修改 base */
-  base: import.meta.env.VITE_PUBLIC_PATH,
+  // base: import.meta.env.VITE_PUBLIC_PATH,
   // 解决[vite] Internal server error: Failed to resolve import
   resolve: {
     alias: {

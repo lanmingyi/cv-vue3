@@ -1,6 +1,6 @@
 <template>
   <div v-if="!props.item.meta?.hidden" :class="{'simple-mode': props.isCollapse, 'first-level': props.isFirstLevel}">
-    <templete v-if="!alwaysShowRootMenu && theOnlyOneChild && !theOnlyOneChild.children">
+    <template v-if="!alwaysShowRootMenu && theOnlyOneChild && !theOnlyOneChild.children">
       <SidebarItemLink v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
         <el-menu-item :index="resolvePath(theOnlyOneChild.path)">
           <svg-icon v-if="theOnlyOneChild.meta.svgIcon" :name="theOnlyOneChild.meta.svgIcon"/>
@@ -10,7 +10,7 @@
           </template>
         </el-menu-item>
       </SidebarItemLink>
-    </templete>
+    </template>
 
     <el-sub-menu v-else :index="resolvePath(props.item.path)" teleported>
       <template #title>
@@ -30,8 +30,8 @@
       </template>
     </el-sub-menu>
   </div>
-
 </template>
+
 <script setup lang="ts">
 import {type PropType, computed} from "vue";
 import {type RouteRecordRaw} from "vue-router";
@@ -74,9 +74,11 @@ const showingChildNumber = computed(() => {
 })
 
 const theOnlyOneChild = computed(() => {
-  if(showingChildNumber.value > 1) return null
+  if(showingChildNumber.value > 1) {
+    return null
+  }
   if(props.item.children){
-    for(const child of props.item?.children){
+    for(const child of props.item.children){
       if(!child.meta || !child.meta.hidden){
         return child
       }
@@ -88,8 +90,12 @@ const theOnlyOneChild = computed(() => {
 })
 
 const resolvePath = (routePath: string) => {
-  if(isExternal(routePath)) return routePath
-  if(isExternal(props.basePath)) return props.basePath
+  if(isExternal(routePath)) {
+    return routePath
+  }
+  if(isExternal(props.basePath)) {
+    return props.basePath
+  }
   return path.resolve(props.basePath, routePath)
 }
 

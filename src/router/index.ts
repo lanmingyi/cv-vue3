@@ -78,7 +78,7 @@ export const constantRoutes: RouteRecordRaw[]=[
     component: Layout,
     children: [
       {
-        path: "https://juejin.cn/post/7089377403717287972",
+        path: "https://github.com/lanmingyi/cv-vue3",
         component: () => {},
         name: "Link",
         meta: {

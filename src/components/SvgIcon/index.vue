@@ -10,7 +10,7 @@ import {computed} from "vue";
 const props = defineProps({
   prefix: {
     type: String,
-    default: ''
+    default: 'icon'
   },
   name: {
     type: String,
@@ -21,6 +21,11 @@ const props = defineProps({
 const symbolId = computed(() => `#${props.prefix}-${props.name}`)
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.svg-icon {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  overflow: hidden;
+}
 </style>

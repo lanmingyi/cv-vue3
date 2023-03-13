@@ -1,5 +1,5 @@
 /// <reference types="vitest" />
-import {defineConfig} from 'vite'
+import {defineConfig, type ConfigEnv, type UserConfigExport, loadEnv} from 'vite'
 import path, {resolve} from "path";
 import vue from '@vitejs/plugin-vue'
 import vueJsx from "@vitejs/plugin-vue-jsx"
@@ -7,6 +7,7 @@ import {createSvgIconsPlugin} from "vite-plugin-svg-icons"
 // import svgLoader from "vite-svg-loader"
 import UnoCSS from "unocss/vite"
 import DefineOptions from "unplugin-vue-define-options/vite"
+import * as process from "process";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -87,3 +88,14 @@ export default defineConfig({
     environment: "jsdom"
   }
 })
+
+
+// export default defineConfig(({mode, command}: ConfigEnv) => {
+// export default defineConfig((config: ConfigEnv) => {
+//   const viteEnv = loadEnv(config.mode, process.cwd()) as ImportMetaEnv
+//   const {VITE_PUBLIC_PATH} = viteEnv
+//   return {
+//     base: VITE_PUBLIC_PATH
+//
+//   }
+// })

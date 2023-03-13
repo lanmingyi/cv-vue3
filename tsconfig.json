@@ -47,7 +47,8 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "types/**/*.d.ts",
-    "vite.config.ts"
+    "vite.config.ts",
+//    "vitest.config.ts"
   ],
   // 编译器默认排除的编译文件
   "exclude": [
